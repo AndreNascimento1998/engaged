@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Logo from "@/components/Icons/Logo.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
 type EnumNamesPage = {
@@ -10,20 +10,17 @@ type EnumNamesPage = {
 const route = useRoute();
 
 const enumNamesPage: EnumNamesPage = {
-  HomePage: "Lista de personagenss",
+  HomePage: "Lista de personagens",
 };
 
-const pageName = ref(enumNamesPage[route.name]);
-
-onMounted(() => {
-  pageName.value = enumNamesPage[route.name];
-  if (pageName) document.title = pageName.value;
+const pageName = computed(() => {
+  return enumNamesPage[route.name as keyof EnumNamesPage];
 });
 </script>
 
 <template>
   <div
-    class="flex flex-col items-center gap-4 lg:flex-row lg:justify-between p-4"
+    class="flex flex-col items-center gap-4 lg:flex-row lg:justify-between p-4 lg:p-[20px]"
   >
     <logo />
     <span class="text-white font-bold text-2xl">{{ pageName }}</span>
