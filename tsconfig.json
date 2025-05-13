@@ -4,7 +4,6 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "lib": ["ESNext", "DOM", "ES2015"],
-    "strict": true
+    "lib": ["ESNext", "DOM", "ES2015"]
   }
 }

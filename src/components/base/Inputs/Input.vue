@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-const text = ref("");
+const model = defineModel<string>();
 </script>
 
 <template>
-  <div class="w-full">
-    <q-input
-      bg-color="teal"
-      standout="text-white"
-      v-model="text"
-      label="Custom standout"
-      :dense="dense"
-    />
-  </div>
+  <q-input
+    v-model="model"
+    bg-color="teal"
+    standout="text-white"
+    label="Custom standout"
+    dense
+  >
+    <template #prepend>
+      <slot name="prepend" />
+    </template>
+  </q-input>
 </template>
