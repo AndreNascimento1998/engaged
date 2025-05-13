@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
-import { quasar, transformAssetUrls } from "@quasar/vite-plugin";
+import { quasar } from "@quasar/vite-plugin";
 
 export default defineConfig({
   plugins: [

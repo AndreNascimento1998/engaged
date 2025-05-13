@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { useGlobalStore } from "@/stores/GlobalStore";
-
-const globalStore = useGlobalStore();
+import InputComponent from "@/components/base/Inputs/Input.vue";
 </script>
 
 <template>
-  <div class="text-[34px] test">HomePage</div>
-  <div class="test__test2" @click="globalStore.count += 1">
-    {{ globalStore.count }}
+  <div class="flex flex-col lg:flex-row items-center">
+    <div class="w-[320px]">
+      <input-component />
+    </div>
   </div>
-  <q-btn label="Click" color="primary" />
 </template>
 
 <style lang="scss">
