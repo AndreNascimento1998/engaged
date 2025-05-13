@@ -1,4 +1,9 @@
 <script setup lang="ts">
+defineProps<{
+  label?: string;
+  dense?: boolean;
+}>();
+
 const model = defineModel<string>();
 </script>
 
@@ -7,8 +12,8 @@ const model = defineModel<string>();
     v-model="model"
     bg-color="teal"
     standout="text-white"
-    label="Custom standout"
-    dense
+    :label="label"
+    :dense="dense"
   >
     <template #prepend>
       <slot name="prepend" />

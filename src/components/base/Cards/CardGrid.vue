@@ -4,8 +4,6 @@ import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/Button/ButtonRounded.vue";
 
-const test = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
 const test2 = ref([
   {
     id: "381",
