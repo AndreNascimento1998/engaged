@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   loading: boolean;
+  label?: string;
 }>();
 </script>
 
@@ -13,7 +14,9 @@ defineProps<{
       <div class="bg-[#00b5cc] item-4"></div>
       <div class="bg-[#00b5cc] item-5"></div>
     </div>
-    <div class="text-center gradient-text text-2xl">AGUARDE UM INSTANTE...</div>
+    <div v-if="label" class="text-center gradient-text text-2xl">
+      {{ label }}
+    </div>
   </div>
 </template>
 

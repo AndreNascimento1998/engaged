@@ -82,7 +82,7 @@ const fetchCharacter = (pageValue: number | null) => {
       v-if="loading"
       class="fixed inset-0 bg-gray-900 opacity-80 flex items-center justify-center z-50"
     >
-      <loading-growth loading />
+      <loading-growth loading label="AGUARDE UM INSTANTE..." />
     </div>
   </div>
 </template>
