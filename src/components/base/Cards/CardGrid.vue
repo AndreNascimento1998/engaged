@@ -1,91 +1,48 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed } from "vue";
 import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/Button/ButtonRounded.vue";
+import { Character, PaginationInfo } from "@/interfaces/Character";
+
+const emit = defineEmits(["change-page"]);
 
 const props = defineProps<{
-  items: any[];
-  pagination: any;
+  items: Character[];
+  pagination: PaginationInfo;
+  currentPage: number;
 }>();
 
-const test2 = ref([
-  {
-    id: "381",
-    name: "Woman Rick",
-    status: "Alive",
-    species: "Alien",
-    type: "Chair",
-    gender: "Female",
-    image: "https://rickandmortyapi.com/api/character/avatar/381.jpeg",
-    episode: [
-      {
-        id: "10",
-        name: "Close Rick-counters of the Rick Kind",
-      },
-    ],
-  },
-  {
-    id: "382",
-    name: "Worldender",
-    status: "Dead",
-    species: "Alien",
-    type: "",
-    gender: "Male",
-    image: "https://rickandmortyapi.com/api/character/avatar/382.jpeg",
-    episode: [
-      {
-        id: "25",
-        name: "Vindicators 3: The Return of Worldender",
-      },
-    ],
-  },
-  {
-    id: "383",
-    name: "Yaarb",
-    status: "Alive",
-    species: "Alien",
-    type: "",
-    gender: "Male",
-    image: "https://rickandmortyapi.com/api/character/avatar/383.jpeg",
-    episode: [
-      {
-        id: "19",
-        name: "Interdimensional Cable 2: Tempting Fate",
-      },
-    ],
-  },
-  {
-    id: "384",
-    name: "Yellow Headed Doctor",
-    status: "Alive",
-    species: "Alien",
-    type: "",
-    gender: "Male",
-    image: "https://rickandmortyapi.com/api/character/avatar/384.jpeg",
-    episode: [
-      {
-        id: "19",
-        name: "Interdimensional Cable 2: Tempting Fate",
-      },
-    ],
-  },
-  {
-    id: "385",
-    name: "Yellow Shirt Rick",
-    status: "unknown",
-    species: "Human",
-    type: "",
-    gender: "Male",
-    image: "https://rickandmortyapi.com/api/character/avatar/385.jpeg",
-    episode: [
-      {
-        id: "22",
-        name: "The Rickshank Rickdemption",
-      },
-    ],
-  },
-]);
+const buttonRoundedOptions = computed(() => {
+  const firstPage = 1;
+  const lastPage = props.pagination?.pages;
+  const current =
+    props.pagination?.next !== null
+      ? props.pagination?.next - 1
+      : props.pagination?.prev !== null
+      ? props.pagination?.prev + 1
+      : 1;
+
+  const prev = current > 1 ? current - 1 : null;
+  const next = current < lastPage ? current + 1 : null;
+
+  const pages = [firstPage, prev, current, next, lastPage];
+
+  return [
+    ...new Set(
+      pages.filter((page) => page != null && page <= lastPage && page >= 1)
+    ),
+  ];
+});
+
+const prevPage = () => {
+  if (props.currentPage > 1) emit("change-page", props.currentPage - 1);
+};
+
+const nextPage = () => {
+  if (props.currentPage < props.pagination?.pages)
+    emit("change-page", props.currentPage + 1);
+};
 </script>
 
 <template>
@@ -108,15 +65,21 @@ const test2 = ref([
       </div>
     </div>
     <div class="self-center flex gap-4">
-      <button-rounded>
+      <button-rounded @click="prevPage" :disabled="currentPage === 1">
         <arrow-left />
       </button-rounded>
-      <button-rounded> {{ pagination.prev }} </button-rounded>
-      <button-rounded active> {{ pagination.prev + 1 }} </button-rounded>
-      <button-rounded> {{ pagination.next }} </button-rounded>
-      <button-rounded> ... </button-rounded>
-      <button-rounded> {{ pagination.pages }} </button-rounded>
-      <button-rounded>
+      <button-rounded
+        v-for="(itemButton, index) in buttonRoundedOptions"
+        :key="index"
+        :active="currentPage === itemButton"
+        @click="emit('change-page', itemButton)"
+      >
+        {{ itemButton }}
+      </button-rounded>
+      <button-rounded
+        @click="nextPage"
+        :disabled="currentPage === pagination?.pages"
+      >
         <arrow-right />
       </button-rounded>
     </div>
