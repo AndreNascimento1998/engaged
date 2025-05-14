@@ -17,7 +17,7 @@ defineProps<{
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .button-rounded-container {
   display: flex;
   justify-content: center;

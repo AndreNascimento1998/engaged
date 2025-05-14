@@ -20,7 +20,7 @@ defineProps<{
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .item-1 {
   animation: loading-animation 1s linear 0s infinite alternate-reverse;
 

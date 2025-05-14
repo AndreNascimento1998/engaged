@@ -5,7 +5,7 @@ import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/base/Button/ButtonRounded.vue";
 import { Character, PaginationInfo } from "@/interfaces/Character";
 
-const emit = defineEmits(["change-page"]);
+const emit = defineEmits(["change-page", "emit-card"]);
 
 const props = defineProps<{
   items: Character[];
@@ -45,6 +45,7 @@ const nextPage = () => {
   <div class="flex flex-col gap-4">
     <div v-if="!loading" class="flex gap-4 flex-wrap justify-center">
       <div
+        @click="emit('emit-card', item.id)"
         v-for="item in items"
         :key="item.id"
         class="w-[150px] md:w-[200px] lg:w-[300px]"
