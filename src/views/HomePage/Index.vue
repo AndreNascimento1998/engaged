@@ -54,7 +54,7 @@ const fetchCharacter = (pageValue: number | null) => {
 
 <template>
   <div
-    class="flex flex-col gap-4 lg:flex-row items-center justify-center w-full p-4 lg:p-[60px]"
+    class="flex flex-col gap-4 lg:flex-row items-center justify-center w-full p-4 lg:p-[60px] relative"
   >
     <div class="flex w-full sm:justify-center lg:justify-end lg:w-full">
       <input-component
@@ -67,14 +67,20 @@ const fetchCharacter = (pageValue: number | null) => {
           <q-icon name="search" />
         </template>
       </input-component>
-
       <button-component @click="fetchCharacter(null)" label="Filtrar" />
     </div>
     <card-grid
+      v-if="result?.characters?.results"
       @change-page="fetchCharacter"
       :items="result?.characters?.results"
       :pagination="result?.characters?.info"
       :current-page="page"
     />
+    <div
+      v-if="loading"
+      class="fixed inset-0 bg-gray-900 opacity-80 flex items-center justify-center z-50"
+    >
+      <q-spinner size="50px" color="white" />
+    </div>
   </div>
 </template>
