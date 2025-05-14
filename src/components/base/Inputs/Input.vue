@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const emit = defineEmits(["clear"]);
+
 defineProps<{
   label?: string;
   dense?: boolean;
@@ -14,6 +16,8 @@ const model = defineModel<string>();
     standout="text-white"
     :label="label"
     :dense="dense"
+    clearable
+    @clear="emit('clear')"
   >
     <template #prepend>
       <slot name="prepend" />
