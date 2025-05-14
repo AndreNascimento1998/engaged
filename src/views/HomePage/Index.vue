@@ -7,9 +7,11 @@ import { ref } from "vue";
 
 const test = ref("");
 
-const { result, loading, error } = useQuery(gql`
-  query {
-    characters(page: 20) {
+const page = ref(parseInt(localStorage.getItem("page")) || 1);
+
+const GET_CHARACTERS = gql`
+  query ($page: Int!) {
+    characters(page: $page) {
       info {
         count
         pages
@@ -31,7 +33,17 @@ const { result, loading, error } = useQuery(gql`
       }
     }
   }
-`);
+`;
+
+const { result, loading, error, refetch } = useQuery(GET_CHARACTERS, () => ({
+  page: page.value,
+}));
+
+const handleClick = (pageValue: number) => {
+  page.value = pageValue;
+  localStorage.setItem("page", pageValue.toString());
+  refetch({ page: page.value });
+};
 </script>
 
 <template>
@@ -46,8 +58,10 @@ const { result, loading, error } = useQuery(gql`
       </input-component>
     </div>
     <card-grid
+      @change-page="handleClick"
       :items="result?.characters?.results"
       :pagination="result?.characters?.info"
+      :current-page="page"
     />
   </div>
 </template>
