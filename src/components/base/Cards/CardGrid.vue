@@ -16,12 +16,7 @@ const props = defineProps<{
 const buttonRoundedOptions = computed(() => {
   const firstPage = 1;
   const lastPage = props.pagination?.pages;
-  const current =
-    props.pagination?.next !== null
-      ? props.pagination?.next - 1
-      : props.pagination?.prev !== null
-      ? props.pagination?.prev + 1
-      : 1;
+  const current = props.currentPage;
 
   const prev = current > 1 ? current - 1 : null;
   const next = current < lastPage ? current + 1 : null;
