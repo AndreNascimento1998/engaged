@@ -1,9 +1,37 @@
 <script setup lang="ts">
 import InputComponent from "@/components/base/Inputs/Input.vue";
 import CardGrid from "@/components/base/Cards/CardGrid.vue";
+import { useQuery } from "@vue/apollo-composable";
+import { gql } from "graphql-tag";
 import { ref } from "vue";
 
 const test = ref("");
+
+const { result, loading, error } = useQuery(gql`
+  query {
+    characters(page: 20) {
+      info {
+        count
+        pages
+        next
+        prev
+      }
+      results {
+        id
+        name
+        status
+        species
+        type
+        gender
+        image
+        episode {
+          id
+          name
+        }
+      }
+    }
+  }
+`);
 </script>
 
 <template>
@@ -17,6 +45,9 @@ const test = ref("");
         </template>
       </input-component>
     </div>
-    <card-grid />
+    <card-grid
+      :items="result?.characters?.results"
+      :pagination="result?.characters?.info"
+    />
   </div>
 </template>

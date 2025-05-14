@@ -4,6 +4,11 @@ import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/Button/ButtonRounded.vue";
 
+const props = defineProps<{
+  items: any[];
+  pagination: any;
+}>();
+
 const test2 = ref([
   {
     id: "381",
@@ -87,7 +92,7 @@ const test2 = ref([
   <div class="flex flex-col gap-4">
     <div class="flex gap-4 flex-wrap justify-center">
       <div
-        v-for="item in test2"
+        v-for="item in items"
         :key="item.id"
         class="w-[150px] md:w-[200px] lg:w-[300px]"
       >
@@ -106,11 +111,11 @@ const test2 = ref([
       <button-rounded>
         <arrow-left />
       </button-rounded>
-      <button-rounded> 1 </button-rounded>
-      <button-rounded> 2 </button-rounded>
-      <button-rounded active> 3 </button-rounded>
+      <button-rounded> {{ pagination.prev }} </button-rounded>
+      <button-rounded active> {{ pagination.prev + 1 }} </button-rounded>
+      <button-rounded> {{ pagination.next }} </button-rounded>
       <button-rounded> ... </button-rounded>
-      <button-rounded> 42 </button-rounded>
+      <button-rounded> {{ pagination.pages }} </button-rounded>
       <button-rounded>
         <arrow-right />
       </button-rounded>
