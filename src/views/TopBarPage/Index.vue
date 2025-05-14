@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import Logo from "@/components/Icons/Logo.vue";
-import { computed, onMounted, ref } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 type EnumNamesPage = {
   HomePage: string;
+  ListPage: string;
 };
 
 const route = useRoute();
 
 const enumNamesPage: EnumNamesPage = {
-  HomePage: "Lista de personagens",
+  HomePage: "Página inicial",
+  ListPage: "Lista de personagens",
 };
 
 const pageName = computed(() => {

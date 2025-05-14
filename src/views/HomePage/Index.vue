@@ -5,12 +5,13 @@ import CardGrid from "@/components/pages/HomePage/CardGrid.vue";
 import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
 import { useQuery } from "@vue/apollo-composable";
 import { gql } from "graphql-tag";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useCharacterStore } from "@/stores/CharacterStore";
+
+const characterStore = useCharacterStore();
 
 const page = ref(parseInt(localStorage.getItem("page")) || 1);
-
 const serachInput = ref(localStorage.getItem("name") || "");
-
 const filterPage = ref(serachInput.value);
 
 const GET_CHARACTERS = gql`
@@ -44,11 +45,17 @@ const { result, loading, error, refetch } = useQuery(GET_CHARACTERS, () => ({
   name: filterPage.value,
 }));
 
+watch(result, (newResult) => {
+  if (newResult?.characters?.results) {
+    characterStore.charactersResult = newResult.characters.results;
+  }
+});
+
 const fetchCharacter = (pageValue: number | null) => {
   page.value = pageValue ? pageValue : 1;
   filterPage.value = serachInput.value;
   localStorage.setItem("page", page.value.toString());
-  localStorage.setItem("name", filterPage.value);
+  localStorage.setItem("name", filterPage.value ?? "");
   refetch({ page: page.value, name: filterPage.value });
 };
 </script>
@@ -72,6 +79,7 @@ const fetchCharacter = (pageValue: number | null) => {
     </div>
     <card-grid
       v-if="result?.characters?.results"
+      @emit-card="(id) => $router.push({ name: 'ListPage', params: { id } })"
       @change-page="fetchCharacter"
       :items="result?.characters?.results"
       :pagination="result?.characters?.info"
