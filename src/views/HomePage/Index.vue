@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import InputComponent from "@/components/base/Inputs/Input.vue";
-import ButtonComponent from "@/components/Button/Button.vue";
-import CardGrid from "@/components/base/Cards/CardGrid.vue";
+import ButtonComponent from "@/components/base/Button/Button.vue";
+import CardGrid from "@/components/pages/HomePage/CardGrid.vue";
+import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
 import { useQuery } from "@vue/apollo-composable";
 import { gql } from "graphql-tag";
 import { ref } from "vue";
@@ -75,12 +76,13 @@ const fetchCharacter = (pageValue: number | null) => {
       :items="result?.characters?.results"
       :pagination="result?.characters?.info"
       :current-page="page"
+      :loading="loading"
     />
     <div
       v-if="loading"
       class="fixed inset-0 bg-gray-900 opacity-80 flex items-center justify-center z-50"
     >
-      <q-spinner size="50px" color="white" />
+      <loading-growth loading />
     </div>
   </div>
 </template>
