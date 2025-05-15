@@ -9,6 +9,7 @@ import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
 import { Episodes } from "@/interfaces/Character";
 import ArrowChangePage from "@/components/Icons/ArrowChangePage.vue";
 import { TranslateKey } from "@/helpers/TranslateKey";
+import ExternalLink from "@/components/Icons/ExternalLink.vue";
 
 const route = useRoute();
 
@@ -43,6 +44,14 @@ const GET_CHARACTER_BY_ID = gql`
   }
 `;
 
+const formatsEpisodes: Record<string, string> = {
+  Pilot: "Pilot_(Rick_and_Morty)",
+  "Edge of Tomorty: Rick, Die, Rickpeat": "Edge_of_Tomorty:_Rick_Die_Rickpeat",
+  "Claw and Hoarder: Special Ricktim's Morty":
+    "Claw_and_Hoarder:_Special_Ricktim%27s_Morty",
+  "One Crew Over the Crewcoo's Morty": "One_Crew_over_the_Crewcoo%27s_Morty",
+};
+
 const { result, loading, error } = useQuery(GET_CHARACTER_BY_ID, () => ({
   id: selectedId.value,
 }));
@@ -59,6 +68,22 @@ const episodes = computed(() => {
 watch(result, (newError) => {
   if (!newError.character) router.push({ name: "HomePage" });
 });
+
+const formatEspecifyEpisode = (episode: string) => {
+  return formatsEpisodes[episode] || episode;
+};
+
+const parsedEpisode = (episode: string) => {
+  const episodeFormatter =
+    episode === "Pilot" ||
+    episode === "Edge of Tomorty: Rick, Die, Rickpeat" ||
+    episode === "Claw and Hoarder: Special Ricktim's Morty" ||
+    episode === "One Crew Over the Crewcoo's Morty"
+      ? formatEspecifyEpisode(episode)
+      : episode.replace(" ", "_").replace(":", "");
+
+  window.open(`https://en.wikipedia.org/wiki/${episodeFormatter}`, "_blank");
+};
 </script>
 
 <template>
@@ -151,9 +176,15 @@ watch(result, (newError) => {
             <span class="text-text-card font-bold">
               {{ episode.epNumber }}
             </span>
-            <span class="text-information">
-              {{ episode.name }}
-            </span>
+            <div class="flex justify-between items-center flex-nowrap gap-12">
+              <span class="text-information">
+                {{ episode.name }}
+              </span>
+              <external-link
+                class="cursor-pointer"
+                @click="parsedEpisode(episode.name)"
+              />
+            </div>
           </div>
         </div>
       </card-info>
@@ -248,5 +279,9 @@ watch(result, (newError) => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap !important;
 }
 </style>
