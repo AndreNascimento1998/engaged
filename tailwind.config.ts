@@ -6,6 +6,7 @@ export default {
       colors: {
         "text-default": "#ffffff",
         "bg-default": "#040C2A",
+        "text-card": "#333333",
       },
     },
   },

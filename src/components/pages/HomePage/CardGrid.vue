@@ -53,8 +53,7 @@ const nextPage = () => {
         v-for="item in items"
         :key="item.id"
       >
-        <!-- w-[150px] md:w-[200px] lg:w-[300px] -->
-        <div class="cursor-pointer h-full">
+        <div class="cursor-pointer h-full animation-card">
           <q-card class="h-full">
             <img :src="item.image" />
             <q-card-section>
@@ -98,6 +97,21 @@ const nextPage = () => {
 .disable-button {
   @media (max-width: 768px) {
     display: none !important;
+  }
+}
+
+.animation-card {
+  &:hover {
+    animation: scale-card 0.2s forwards;
+  }
+}
+
+@keyframes scale-card {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
   }
 }
 </style>

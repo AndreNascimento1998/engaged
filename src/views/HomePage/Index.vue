@@ -68,7 +68,7 @@ const fetchCharacter = (pageValue: number | null) => {
           <q-icon name="search" />
         </template>
       </input-component>
-      <button-component @click="fetchCharacter(null)" label="Filtrar" />
+      <button-component @click="fetchCharacter(null)" label="Buscar" />
     </div>
     <card-grid
       v-if="result?.characters?.results"
