@@ -5,10 +5,7 @@ import CardGrid from "@/components/pages/HomePage/CardGrid.vue";
 import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
 import { useQuery } from "@vue/apollo-composable";
 import { gql } from "graphql-tag";
-import { ref, watch } from "vue";
-import { useCharacterStore } from "@/stores/CharacterStore";
-
-const characterStore = useCharacterStore();
+import { ref } from "vue";
 
 const page = ref(parseInt(localStorage.getItem("page")) || 1);
 const serachInput = ref(localStorage.getItem("name") || "");
@@ -37,12 +34,6 @@ const { result, loading, error, refetch } = useQuery(GET_CHARACTERS, () => ({
   page: page.value,
   name: filterPage.value,
 }));
-
-watch(result, (newResult) => {
-  if (newResult?.characters?.results) {
-    characterStore.charactersResult = newResult.characters.results;
-  }
-});
 
 const fetchCharacter = (pageValue: number | null) => {
   page.value = pageValue ? pageValue : 1;
