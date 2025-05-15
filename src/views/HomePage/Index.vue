@@ -86,6 +86,7 @@ const fetchCharacter = (pageValue: number | null) => {
 <style scoped lang="scss">
 .adjustment-position {
   justify-content: center;
+  flex-wrap: nowrap;
 
   @media (min-width: 1024px) {
     justify-content: end;

@@ -89,7 +89,7 @@ const nextPage = () => {
     </div>
   </div>
   <div v-else>
-    <img :src="imageVoid" alt="" />
+    <img :src="imageVoid" alt="Banner" />
   </div>
 </template>
 
