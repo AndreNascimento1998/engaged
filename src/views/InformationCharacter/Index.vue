@@ -50,6 +50,7 @@ const formatsEpisodes: Record<string, string> = {
   "Claw and Hoarder: Special Ricktim's Morty":
     "Claw_and_Hoarder:_Special_Ricktim%27s_Morty",
   "One Crew Over the Crewcoo's Morty": "One_Crew_over_the_Crewcoo%27s_Morty",
+  "Star Mort: Rickturn of the Jerri": "Star_Mort_Rickturn_of_the_Jerri",
 };
 
 const { result, loading, error } = useQuery(GET_CHARACTER_BY_ID, () => ({
@@ -74,13 +75,15 @@ const formatEspecifyEpisode = (episode: string) => {
 };
 
 const parsedEpisode = (episode: string) => {
+  console.log(episode);
   const episodeFormatter =
     episode === "Pilot" ||
     episode === "Edge of Tomorty: Rick, Die, Rickpeat" ||
     episode === "Claw and Hoarder: Special Ricktim's Morty" ||
-    episode === "One Crew Over the Crewcoo's Morty"
+    episode === "One Crew Over the Crewcoo's Morty" ||
+    episode === "Star Mort: Rickturn of the Jerri"
       ? formatEspecifyEpisode(episode)
-      : episode.replace(" ", "_").replace(":", "");
+      : episode.replace(" ", "_");
 
   window.open(`https://en.wikipedia.org/wiki/${episodeFormatter}`, "_blank");
 };
