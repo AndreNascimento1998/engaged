@@ -25,7 +25,7 @@ defineProps<{
 
 <style lang="scss" scoped>
 .item-1 {
-  animation: loading-animation 1s linear 0s infinite alternate-reverse;
+  animation: loading-animation 0.8s linear 0s infinite alternate-reverse;
   border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
@@ -33,7 +33,7 @@ defineProps<{
 }
 
 .item-2 {
-  animation: loading-animation 1s linear 0.3s infinite alternate-reverse;
+  animation: loading-animation 0.8s linear 0.2s infinite alternate-reverse;
   border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
@@ -41,7 +41,7 @@ defineProps<{
 }
 
 .item-3 {
-  animation: loading-animation 1s linear 0.6s infinite alternate-reverse;
+  animation: loading-animation 0.8s linear 0.4s infinite alternate-reverse;
   border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
@@ -49,7 +49,7 @@ defineProps<{
 }
 
 .item-4 {
-  animation: loading-animation 1s linear 0.9s infinite alternate-reverse;
+  animation: loading-animation 0.8s linear 0.8s infinite alternate-reverse;
   border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
@@ -57,7 +57,7 @@ defineProps<{
 }
 
 .item-5 {
-  animation: loading-animation 1s linear 1.2s infinite alternate-reverse;
+  animation: loading-animation 0.8s linear 1s infinite alternate-reverse;
   border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
@@ -73,8 +73,13 @@ defineProps<{
     transform: scaleY(0);
     background-color: $secondary;
   }
-  100% {
+  50% {
+    background-color: $secondary;
+  }
+  75% {
     background-color: $primary;
+  }
+  100% {
     transform: scaleY(1);
   }
 }
