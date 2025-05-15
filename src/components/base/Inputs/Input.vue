@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits(["clear"]);
+const emit = defineEmits(["clear", "enter"]);
 
 defineProps<{
   label?: string;
@@ -17,6 +17,7 @@ const model = defineModel<string>();
     :label="label"
     :dense="dense"
     clearable
+    @keyup.enter="emit('enter')"
     color="white"
     class="text-white border border-white rounded-[4px]"
     input-class="text-white"

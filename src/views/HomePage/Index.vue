@@ -60,6 +60,7 @@ const fetchCharacter = (pageValue: number | null) => {
     <div class="flex w-full gap-4 lg:w-full adjustment-position">
       <input-component
         v-model="serachInput"
+        @keypress.enter="fetchCharacter(null)"
         @clear="fetchCharacter"
         label="Nome do personagem"
         dense
