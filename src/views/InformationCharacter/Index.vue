@@ -94,7 +94,7 @@ const parsedEpisode = (episode: string) => {
     v-if="result"
     class="flex flex-col items-center gap-12 w-full py-12 lg:pt-0 animation-mounted-header-top"
   >
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col items-center gap-4 px-4">
       <div class="rounded-full border-[4px] border-white w-[280px] h-[280px]">
         <img
           :src="result?.character?.image"
@@ -104,7 +104,7 @@ const parsedEpisode = (episode: string) => {
           height="280"
         />
       </div>
-      <span class="flex justify-center text-3xl gradient-text">{{
+      <span class="flex justify-center text-3xl gradient-text text-center">{{
         result?.character.name
       }}</span>
     </div>
