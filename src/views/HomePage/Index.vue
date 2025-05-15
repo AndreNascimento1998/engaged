@@ -57,7 +57,7 @@ const fetchCharacter = (pageValue: number | null) => {
   <div
     class="flex flex-col gap-4 lg:flex-row items-center justify-center w-full p-4 lg:p-[60px] relative"
   >
-    <div class="flex w-full sm:justify-center lg:justify-end lg:w-full">
+    <div class="flex w-full md:justify-center lg:justify-end lg:w-full">
       <input-component
         v-model="serachInput"
         @clear="fetchCharacter"

@@ -19,8 +19,8 @@ const buttonRoundedOptions = computed(() => {
   const lastPage = props.pagination?.pages;
   const current = props.currentPage;
 
-  const prev = current > 1 ? current - 1 : null;
-  const next = current < lastPage ? current + 1 : null;
+  const prev = current > 5 ? current - 5 : null;
+  const next = current < lastPage ? current + 5 : null;
 
   const pages = [firstPage, prev, current, next, lastPage];
 
@@ -71,6 +71,7 @@ const nextPage = () => {
       <button-rounded
         v-for="(itemButton, index) in buttonRoundedOptions"
         :key="index"
+        :class="{ 'disable-button': index === 1 || index === 3 }"
         :active="currentPage === itemButton"
         @click="emit('change-page', itemButton)"
       >
@@ -85,3 +86,11 @@ const nextPage = () => {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.disable-button {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+</style>
