@@ -26,15 +26,8 @@ const GET_CHARACTERS = gql`
       results {
         id
         name
-        status
         species
-        type
-        gender
         image
-        episode {
-          id
-          name
-        }
       }
     }
   }
@@ -86,11 +79,6 @@ const fetchCharacter = (pageValue: number | null) => {
       :current-page="page"
       :loading="loading"
     />
-    <div
-      v-if="loading"
-      class="fixed inset-0 bg-gray-900 opacity-80 flex items-center justify-center z-50"
-    >
-      <loading-growth loading label="AGUARDE UM INSTANTE..." />
-    </div>
+    <loading-growth :loading="loading" label="AGUARDE UM INSTANTE..." />
   </div>
 </template>

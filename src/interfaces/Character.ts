@@ -1,6 +1,7 @@
-type Episodes = {
+export type Episodes = {
   id: string;
   name: string;
+  episode: string;
   __typename: string;
 };
 

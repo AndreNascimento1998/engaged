@@ -6,7 +6,10 @@ defineProps<{
 </script>
 
 <template>
-  <div v-if="loading" class="flex flex-col gap-4">
+  <div
+    v-if="loading"
+    class="flex flex-col items-center justify-center gap-4 fixed inset-0 bg-[#111827CC] z-50"
+  >
     <div class="flex gap-4 p-8">
       <div class="bg-[#00b5cc] item-1"></div>
       <div class="bg-[#00b5cc] item-2"></div>
@@ -23,7 +26,7 @@ defineProps<{
 <style lang="scss" scoped>
 .item-1 {
   animation: loading-animation 1s linear 0s infinite alternate-reverse;
-
+  border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
   height: 200px;
@@ -31,7 +34,7 @@ defineProps<{
 
 .item-2 {
   animation: loading-animation 1s linear 0.3s infinite alternate-reverse;
-
+  border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
   height: 200px;
@@ -39,7 +42,7 @@ defineProps<{
 
 .item-3 {
   animation: loading-animation 1s linear 0.6s infinite alternate-reverse;
-
+  border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
   height: 200px;
@@ -47,7 +50,7 @@ defineProps<{
 
 .item-4 {
   animation: loading-animation 1s linear 0.9s infinite alternate-reverse;
-
+  border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
   height: 200px;
@@ -55,7 +58,7 @@ defineProps<{
 
 .item-5 {
   animation: loading-animation 1s linear 1.2s infinite alternate-reverse;
-
+  border-radius: 10px;
   transform-origin: bottom;
   width: 60px;
   height: 200px;
