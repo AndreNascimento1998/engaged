@@ -7,9 +7,9 @@ const routes = [
     component: () => import("@/views/HomePage/Index.vue"),
   },
   {
-    path: "/list/:id",
-    name: "ListPage",
-    component: () => import("@/views/ListPage/Index.vue"),
+    path: "/character/:id",
+    name: "CharacterPage",
+    component: () => import("@/views/InformationCharacter/Index.vue"),
   },
 ];
 

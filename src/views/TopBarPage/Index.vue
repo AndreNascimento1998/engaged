@@ -5,14 +5,14 @@ import { useRoute } from "vue-router";
 
 type EnumNamesPage = {
   HomePage: string;
-  ListPage: string;
+  CharacterPage: string;
 };
 
 const route = useRoute();
 
 const enumNamesPage: EnumNamesPage = {
-  HomePage: "Página inicial",
-  ListPage: "Lista de personagens",
+  HomePage: "Lista de Personagens",
+  CharacterPage: "Personagem",
 };
 
 const pageName = computed(() => {
