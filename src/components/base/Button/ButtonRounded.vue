@@ -28,6 +28,12 @@ defineProps<{
   height: 48px;
   cursor: pointer;
 
+  @media (max-width: 768px) {
+    font-size: 12px;
+    width: 32px;
+    height: 32px;
+  }
+
   &:hover {
     border: 1px solid $button-rounded-hover;
     color: $button-rounded-hover;

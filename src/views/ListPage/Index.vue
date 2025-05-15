@@ -159,7 +159,7 @@ watch(result, (newError) => {
       </card-info>
     </div>
   </div>
-  <div class="flex justify-center text-2xl text-white pb-12">
+  <div v-if="result" class="flex justify-center text-2xl text-white pb-12">
     <div
       @click="$router.push({ name: 'HomePage' })"
       class="hover-back-page flex justify-center items-center gap-2 cursor-pointer"

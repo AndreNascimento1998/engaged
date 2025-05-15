@@ -73,7 +73,7 @@ const fetchCharacter = (pageValue: number | null) => {
     </div>
     <card-grid
       v-if="result?.characters?.results"
-      @emit-card="(id) => $router.push({ name: 'ListPage', params: { id } })"
+      @click="(id: string) => $router.push({ name: 'ListPage', params: { id } })"
       @change-page="fetchCharacter"
       :items="result?.characters?.results"
       :pagination="result?.characters?.info"

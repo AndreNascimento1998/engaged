@@ -5,8 +5,9 @@ import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/base/Button/ButtonRounded.vue";
 import { Character, PaginationInfo } from "@/interfaces/Character";
 import imageVoid from "@/assets/no-request.png";
+import { TranslateKey } from "@/helpers/TranslateKey";
 
-const emit = defineEmits(["change-page", "emit-card"]);
+const emit = defineEmits(["change-page", "click"]);
 
 const props = defineProps<{
   items: Character[];
@@ -48,17 +49,15 @@ const nextPage = () => {
       v-if="!loading"
       class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 items-stretch gap-8"
     >
-      <div
-        @click="emit('emit-card', item.id)"
-        v-for="item in items"
-        :key="item.id"
-      >
+      <div @click="emit('click', item.id)" v-for="item in items" :key="item.id">
         <div class="cursor-pointer h-full animation-card">
           <q-card class="h-full">
             <img :src="item.image" />
             <q-card-section>
               <div class="text-base font-bold">{{ item.name }}</div>
-              <div class="text-sm">{{ item.species }}</div>
+              <div class="text-sm">
+                {{ TranslateKey[item.species] || item.species }}
+              </div>
             </q-card-section>
           </q-card>
         </div>
@@ -74,7 +73,6 @@ const nextPage = () => {
       <button-rounded
         v-for="(itemButton, index) in buttonRoundedOptions"
         :key="index"
-        :class="{ 'disable-button': index === 1 || index === 3 }"
         :active="currentPage === itemButton"
         @click="emit('change-page', itemButton)"
       >
