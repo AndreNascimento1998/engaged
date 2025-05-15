@@ -235,11 +235,11 @@ watch(result, (newError) => {
 }
 
 .animation-mounted-header-top {
-  animation: fadeInTop 0.8s ease-in-out;
+  animation: fadeInBottom 0.8s ease-in-out;
   overflow: hidden;
 }
 
-@keyframes fadeInTop {
+@keyframes fadeInBottom {
   0% {
     opacity: 0;
     transform: translateY(300px);
