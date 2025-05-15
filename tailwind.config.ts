@@ -10,6 +10,7 @@ export default {
         "text-default": "#ffffff",
         "bg-default": "#040C2A",
         "text-card": "#333333",
+        primary: "#00b5cc",
       },
     },
   },
