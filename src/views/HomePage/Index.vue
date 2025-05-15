@@ -55,9 +55,9 @@ const fetchCharacter = (pageValue: number | null) => {
 
 <template>
   <div
-    class="flex flex-col gap-4 lg:flex-row items-center justify-center w-full p-4 lg:p-[60px] relative"
+    class="flex flex-col gap-12 lg:flex-row items-center justify-center w-full pt-4 pb-12 lg:px-[180px] relative"
   >
-    <div class="flex w-full md:justify-center lg:justify-end lg:w-full">
+    <div class="flex w-full gap-4 lg:w-full adjustment-position">
       <input-component
         v-model="serachInput"
         @clear="fetchCharacter"
@@ -82,3 +82,13 @@ const fetchCharacter = (pageValue: number | null) => {
     <loading-growth :loading="loading" label="AGUARDE UM INSTANTE..." />
   </div>
 </template>
+
+<style scoped lang="scss">
+.adjustment-position {
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    justify-content: end;
+  }
+}
+</style>
