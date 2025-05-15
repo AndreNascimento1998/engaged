@@ -42,20 +42,23 @@ const nextPage = () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <div v-if="!loading" class="flex gap-4 flex-wrap justify-center">
+  <div class="flex flex-col gap-12">
+    <div
+      v-if="!loading"
+      class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 items-stretch gap-8"
+    >
       <div
         @click="emit('emit-card', item.id)"
         v-for="item in items"
         :key="item.id"
-        class="w-[150px] md:w-[200px] lg:w-[300px]"
       >
-        <div class="cursor-pointer">
-          <q-card>
+        <!-- w-[150px] md:w-[200px] lg:w-[300px] -->
+        <div class="cursor-pointer h-full">
+          <q-card class="h-full">
             <img :src="item.image" />
             <q-card-section>
-              <div class="text-h6">{{ item.name }}</div>
-              <div class="text-subtitle2">{{ item.species }}</div>
+              <div class="text-base font-bold">{{ item.name }}</div>
+              <div class="text-sm">{{ item.species }}</div>
             </q-card-section>
           </q-card>
         </div>
