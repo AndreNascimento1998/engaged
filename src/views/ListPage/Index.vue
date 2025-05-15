@@ -316,14 +316,6 @@ watch(result, (newError) => {
     height: 600px;
   }
 }
-.gradient-text {
-  background: linear-gradient(270deg, $secondary, $primary, $secondary);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: animatedGradient 3s ease infinite alternate;
-}
 
 .hover-back-page {
   &:hover {

@@ -10,3 +10,12 @@ body {
     background-color: $background-default;
     font-family: 'Poppins', sans-serif !important;
 }
+
+.gradient-text {
+  background: linear-gradient(270deg, $secondary, $primary, $secondary);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: animatedGradient 3s ease infinite alternate;
+}

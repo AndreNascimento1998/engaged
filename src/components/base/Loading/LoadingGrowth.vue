@@ -84,15 +84,6 @@ defineProps<{
   }
 }
 
-.gradient-text {
-  background: linear-gradient(270deg, $secondary, $primary, $secondary);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: animatedGradient 3s ease infinite alternate;
-}
-
 @keyframes animatedGradient {
   0% {
     background-position: 0% 50%;
