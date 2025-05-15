@@ -176,7 +176,7 @@ const parsedEpisode = (episode: string) => {
             <span class="text-text-card font-bold">
               {{ episode.epNumber }}
             </span>
-            <div class="flex justify-between items-center flex-nowrap gap-12">
+            <div class="grid grid-cols-[4fr_0.4fr] items-center gap-12">
               <span class="text-information">
                 {{ episode.name }}
               </span>
