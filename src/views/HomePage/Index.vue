@@ -48,7 +48,9 @@ const fetchCharacter = (pageValue: number | null) => {
   <div
     class="flex flex-col gap-12 lg:flex-row items-center justify-center w-full p-4 pb-12 lg:px-[180px] relative"
   >
-    <div class="flex w-full gap-4 lg:w-full adjustment-position">
+    <div
+      class="flex w-full gap-4 lg:w-full adjustment-position animation-input"
+    >
       <input-component
         v-model="serachInput"
         @keypress.enter="fetchCharacter(null)"
@@ -82,6 +84,22 @@ const fetchCharacter = (pageValue: number | null) => {
 
   @media (min-width: 1024px) {
     justify-content: end;
+  }
+}
+
+.animation-input {
+  animation: fadeIn 0.5s ease-in-out;
+  overflow: hidden !important;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>

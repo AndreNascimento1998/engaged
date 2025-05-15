@@ -22,7 +22,7 @@ const pageName = computed(() => {
 
 <template>
   <div
-    class="flex flex-col items-center gap-4 lg:flex-row lg:justify-between p-4 lg:py-[20px] lg:px-[180px]"
+    class="flex flex-col items-center gap-4 lg:flex-row lg:justify-between p-4 lg:py-[20px] lg:px-[180px] animation-top-bar"
   >
     <logo />
     <span class="text-white font-bold text-2xl font-originalSurfer">
@@ -30,3 +30,20 @@ const pageName = computed(() => {
     </span>
   </div>
 </template>
+
+<style scoped lang="scss">
+.animation-top-bar {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
