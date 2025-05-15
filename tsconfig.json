@@ -5,6 +5,12 @@
       "@/*": ["src/*"]
     },
     "lib": ["ESNext", "DOM", "ES2015"],
-    "strict": true
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   }
 }
