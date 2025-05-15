@@ -47,7 +47,7 @@ const nextPage = () => {
   <div v-if="items?.length !== 0" class="flex flex-col gap-12">
     <div
       v-if="!loading"
-      class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 items-stretch gap-8"
+      class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 items-stretch gap-8 animation-card-mount"
     >
       <div @click="emit('click', item.id)" v-for="item in items" :key="item.id">
         <div class="cursor-pointer h-full animation-card">
@@ -109,11 +109,24 @@ const nextPage = () => {
 @keyframes scale-card {
   0% {
     transform: scale(1);
-    background-color: $primary;
   }
   100% {
     transform: scale(1.08);
-    background-color: $secondary;
+  }
+}
+
+.animation-card-mount {
+  animation: mount-card 0.5s forwards;
+}
+
+@keyframes mount-card {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 </style>
