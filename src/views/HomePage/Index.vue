@@ -7,7 +7,7 @@ import { useQuery } from "@vue/apollo-composable";
 import { gql } from "graphql-tag";
 import { ref } from "vue";
 
-const page = ref(parseInt(localStorage.getItem("page")) || 1);
+const page = ref(parseInt(localStorage.getItem("page") || "") || 1);
 const serachInput = ref(localStorage.getItem("name") || "");
 const filterPage = ref(serachInput.value);
 
