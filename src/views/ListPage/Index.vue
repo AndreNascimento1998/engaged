@@ -5,10 +5,69 @@ import { useQuery } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import CardInfo from "@/components/base/Cards/Card.vue";
+import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
+import { Episodes } from "@/interfaces/Character";
 
 const route = useRoute();
 
 const selectedId = ref(route.params.id);
+
+const translateKeys: any = {
+  unknown: "Desconhecido",
+  Alive: "Vivo",
+  Dead: "Morto",
+  Human: "Humano",
+  Male: "Masculino",
+  "Earth (C-137)": "Terra (C-137)",
+  "Earth (Replacement Dimension)": "Terra (Dimensão Substituta)",
+  Female: "Feminino",
+  Humanoid: "Humanoide",
+  "Mythological Creature": "Criatura Mitológica",
+  "Fantasy World": "Mundo da fantasia",
+  "Bird World": "Mundo dos pássaros",
+  "Post-Apocalyptic Earth": "Terra pós-apocalíptica",
+  "Rick's Battery Microverse": "Microverso da bateria do Rick",
+  Robot: "Robô",
+  "Earth (K-83)": "Terra (K-83)",
+  "Hideout Planet": "Planeta Escondido",
+  "Cronenberg Earth": "Terra Cronenberg",
+  "Space station": "Estação espacial",
+  "Citadel of Ricks": "Cidadela dos Ricks",
+  Planet: "Planeta",
+  "Giant's Town": "Cidade dos Gigantes",
+  "Fantasy town": "Cidade da fantasia",
+  "Unity's Planet": "Planeta da Unidade",
+  "Earth (C-500A)": "Terra (C-500A)",
+  "Rick's Memories": "Memórias do Rick",
+  Memory: "Memória",
+  "Anatomy Park": "Parque de Anatomia",
+  Microverse: "Microverso",
+  Disease: "Doença",
+  "Planet Squanch": "Planeta Squanch",
+  "Eric Stoltz Mask Earth": "Terra da Máscara do Eric Stoltz",
+  "Interdimensional Cable": "Cabo Interdimensional",
+  Genderless: "Sem gênero",
+  "Resort Planet": "Planeta Resort",
+  Customs: "Alfândega",
+  "Interdimensional Customs": "Alfândega Interdimensional",
+  "Galactic Federation Prison": "Prisão da Federação Galáctica",
+  "Hamster in Butt World": "Mundo do Hamster no C#",
+  "Earth (Giant Telepathic Spiders Dimension)":
+    "Terra (Dimensão de Aranhas Telepáticas Gigantes)",
+  Alphabetrium: "Alfabeto",
+  Daycare: "Creche",
+  "Earth (5-126)": "Terra (5-126)",
+  "Zigerion's Base": "Base dos Zigerions",
+  "Dwarf planet (Celestial Dwarf)": "Planeta anão (Anão Celestial)",
+  Pluto: "Plutão",
+  "Zeep Xanflorp's Miniverse": "Miniverso de Zeep Xanflorp",
+  "Larva Alien's Planet": "Planeta da Larva Alienígena",
+  "Purge Planet": "Planeta da Purificação",
+  "Immortality Field Resort": "Resort do Campo da Imortalidade",
+  "Worldender's lair": "Covil do Worldender",
+  "Mr. Goldenfold's dream": "Sonho do Sr. Goldenfold",
+  "Earth (K-22)": "Terra (K-22)",
+};
 
 const GET_CHARACTER_BY_ID = gql`
   query ($id: ID!) {
@@ -33,6 +92,7 @@ const GET_CHARACTER_BY_ID = gql`
       episode {
         id
         name
+        episode
       }
     }
   }
@@ -44,9 +104,9 @@ const { result, loading, error } = useQuery(GET_CHARACTER_BY_ID, () => ({
 
 const episodes = computed(() => {
   console.log(result.value?.character?.episode);
-  return result.value?.character?.episode.map((episode) => {
+  return result.value?.character?.episode.map((episode: Episodes) => {
     return {
-      epNumber: episode.id,
+      epNumber: episode.episode,
       name: episode.name,
     };
   });
@@ -82,32 +142,51 @@ watch(result, (newError) => {
           <div class="flex flex-col border-b-2 border-[#21212114]">
             <span class="text-description font-bold">Gênero</span>
             <span class="text-information">
-              {{ result?.character?.gender }}
+              {{
+                translateKeys[result?.character?.gender] ||
+                result?.character?.gender
+              }}
             </span>
           </div>
           <div class="flex flex-col border-b-2 border-[#21212114]">
             <span class="text-description font-bold">Espécie</span>
             <span class="text-information">
-              {{ result?.character?.species }}
+              {{
+                translateKeys[result?.character?.species] ||
+                result?.character?.species
+              }}
             </span>
           </div>
           <div class="flex flex-col border-b-2 border-[#21212114]">
             <span class="text-description font-bold">Origem</span>
             <span class="text-information">
-              {{ result?.character?.origin.name }}
+              {{
+                translateKeys[result?.character?.origin.name] ||
+                result?.character?.origin.name
+              }}
             </span>
           </div>
           <div class="flex flex-col border-b-2 border-[#21212114]">
             <span class="text-description font-bold">Status</span>
             <span class="text-information">
-              {{ result?.character?.status }}
+              {{
+                translateKeys[result?.character?.status] ||
+                result?.character?.status
+              }}
             </span>
           </div>
           <div class="flex flex-col border-b-2 border-[#21212114]">
             <span class="text-description font-bold">Localização</span>
             <span class="text-information">
-              {{ result?.character?.location.name }} -
-              {{ result?.character?.location.type }}
+              {{
+                translateKeys[result?.character?.location.type] ||
+                result?.character?.location.type
+              }}
+              -
+              {{
+                translateKeys[result?.character?.location.name] ||
+                result?.character?.location.name
+              }}
             </span>
           </div>
         </div>
@@ -133,6 +212,13 @@ watch(result, (newError) => {
       </card-info>
     </div>
   </div>
+  <div
+    @click="$router.push({ name: 'HomePage' })"
+    class="text-center text-3xl text-white"
+  >
+    Voltar
+  </div>
+  <loading-growth :loading="loading" label="AGUARDE UM INSTANTE..." />
 </template>
 
 <style lang="scss" scoped>
