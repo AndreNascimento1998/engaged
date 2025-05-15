@@ -194,11 +194,11 @@ watch(result, (newError) => {
 
 .hover-back-page {
   &:hover {
-    color: $primary;
+    color: $hover;
 
-    fill: $primary;
+    fill: $hover;
 
-    stroke: $primary;
+    stroke: $hover;
   }
 }
 </style>

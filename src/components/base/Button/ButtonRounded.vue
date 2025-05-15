@@ -35,29 +35,42 @@ defineProps<{
   }
 
   &:hover {
-    border: 1px solid $button-rounded-hover;
-    color: $button-rounded-hover;
+    border: 1px solid $hover;
+    color: $hover;
 
     span {
-      color: $button-rounded-hover;
+      color: $hover;
     }
 
     * {
-      fill: $button-rounded-hover;
+      fill: $hover;
     }
   }
 }
 
 .active-button {
-  border: 1px solid $button-rounded-hover;
-  color: $button-rounded-hover;
+  border: 1px solid $active;
+  color: $active;
 
   span {
-    color: $button-rounded-hover;
+    color: $active;
   }
 
   * {
-    fill: $button-rounded-hover;
+    fill: $active;
+  }
+
+  &:hover {
+    border: 1px solid $active;
+    color: $active;
+
+    span {
+      color: $active;
+    }
+
+    * {
+      fill: $active;
+    }
   }
 }
 

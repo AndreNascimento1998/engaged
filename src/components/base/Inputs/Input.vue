@@ -18,9 +18,9 @@ const model = defineModel<string>();
     :dense="dense"
     clearable
     @keyup.enter="emit('enter')"
-    color="white"
-    class="text-white border border-white rounded-[4px]"
-    input-class="text-white"
+    color="primary"
+    class="text-white border border-primary rounded-[4px]"
+    input-class="text-secondary"
     label-color="white"
     @clear="emit('clear')"
   >

@@ -101,15 +101,19 @@ const nextPage = () => {
 .animation-card {
   &:hover {
     animation: scale-card 0.2s forwards;
+    border: 2px solid $hover;
+    border-radius: 6px;
   }
 }
 
 @keyframes scale-card {
   0% {
     transform: scale(1);
+    background-color: $primary;
   }
   100% {
     transform: scale(1.08);
+    background-color: $secondary;
   }
 }
 </style>
