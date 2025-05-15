@@ -64,7 +64,7 @@ watch(result, (newError) => {
 <template>
   <div
     v-if="result"
-    class="flex flex-col items-center gap-12 w-full py-12 lg:pt-0"
+    class="flex flex-col items-center gap-12 w-full py-12 lg:pt-0 animation-mounted-header-top"
   >
     <div class="flex flex-col gap-4">
       <div class="rounded-full border-[4px] border-white w-[280px] h-[280px]">
@@ -81,7 +81,7 @@ watch(result, (newError) => {
       }}</span>
     </div>
     <div class="flex gap-20 flex-col lg:flex-row">
-      <card-info class="card-width overflow-auto">
+      <card-info class="card-width overflow-auto animation-mounted-card-left">
         <div class="flex flex-col gap-8 text-xl">
           <span class="text-title text-2xl sticky pt-6 pb-2 top-0 bg-white"
             >Ficha técnica</span
@@ -138,7 +138,7 @@ watch(result, (newError) => {
           </div>
         </div>
       </card-info>
-      <card-info class="card-width overflow-auto">
+      <card-info class="card-width overflow-auto animation-mounted-card-right">
         <div class="flex flex-col gap-8 text-xl">
           <span class="text-title text-2xl sticky pt-6 pb-2 top-0 bg-white">
             Participação Episódios
@@ -199,6 +199,54 @@ watch(result, (newError) => {
     fill: $hover;
 
     stroke: $hover;
+  }
+}
+
+.animation-mounted-card-left {
+  animation: fadeInLeft 0.8s ease-in-out;
+  overflow: hidden;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animation-mounted-card-right {
+  animation: fadeInRight 0.8s ease-in-out;
+  overflow: hidden;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animation-mounted-header-top {
+  animation: fadeInTop 0.8s ease-in-out;
+  overflow: hidden;
+}
+
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
