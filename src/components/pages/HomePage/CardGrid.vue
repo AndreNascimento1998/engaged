@@ -4,6 +4,7 @@ import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
 import ButtonRounded from "@/components/base/Button/ButtonRounded.vue";
 import { Character, PaginationInfo } from "@/interfaces/Character";
+import imageVoid from "@/assets/no-request.png";
 
 const emit = defineEmits(["change-page", "emit-card"]);
 
@@ -42,7 +43,7 @@ const nextPage = () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-12">
+  <div v-if="items?.length !== 0" class="flex flex-col gap-12">
     <div
       v-if="!loading"
       class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 items-stretch gap-8"
@@ -87,6 +88,9 @@ const nextPage = () => {
         <arrow-right />
       </button-rounded>
     </div>
+  </div>
+  <div v-else>
+    <img :src="imageVoid" alt="" />
   </div>
 </template>
 

@@ -4,5 +4,5 @@
 @import "../quasar-variables.sass";
 
 body {
-    background-color: $background-default;
+    background: linear-gradient(to top, $background-default, lighten($background-default, 4%));
 }

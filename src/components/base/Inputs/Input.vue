@@ -12,11 +12,15 @@ const model = defineModel<string>();
 <template>
   <q-input
     v-model="model"
-    bg-color="teal"
-    standout="text-white"
+    filled
+    standout
     :label="label"
     :dense="dense"
     clearable
+    color="white"
+    class="text-white border border-white rounded-[4px]"
+    input-class="text-white"
+    label-color="white"
     @clear="emit('clear')"
   >
     <template #prepend>
@@ -24,3 +28,15 @@ const model = defineModel<string>();
     </template>
   </q-input>
 </template>
+
+<style lang="scss">
+/* Força o ícone de limpar a ficar branco */
+.q-field__append .q-icon {
+  color: white !important;
+  opacity: 1;
+}
+
+.q-icon {
+  color: white !important;
+}
+</style>

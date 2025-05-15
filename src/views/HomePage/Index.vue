@@ -55,13 +55,13 @@ const fetchCharacter = (pageValue: number | null) => {
 
 <template>
   <div
-    class="flex flex-col gap-12 lg:flex-row items-center justify-center w-full pt-4 pb-12 lg:px-[180px] relative"
+    class="flex flex-col gap-12 lg:flex-row items-center justify-center w-full p-4 pb-12 lg:px-[180px] relative"
   >
     <div class="flex w-full gap-4 lg:w-full adjustment-position">
       <input-component
         v-model="serachInput"
         @clear="fetchCharacter"
-        label="Filtrar por nome"
+        label="Nome do personagem"
         dense
       >
         <template #prepend>
