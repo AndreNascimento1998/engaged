@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from "@/components/Icons/Logo.vue";
+import router from "@/router";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 
@@ -24,7 +25,7 @@ const pageName = computed(() => {
   <div
     class="flex flex-col items-center gap-4 lg:flex-row lg:justify-between p-4 lg:py-[20px] lg:px-[180px] animation-top-bar"
   >
-    <logo />
+    <logo @click="router.push({ name: 'HomePage' })" class="cursor-pointer" />
     <span class="text-white font-bold text-2xl font-originalSurfer">
       {{ pageName }}
     </span>
