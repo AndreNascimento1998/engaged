@@ -21,8 +21,8 @@ const buttonRoundedOptions = computed(() => {
   const lastPage = props.pagination?.pages;
   const current = props.currentPage;
 
-  const prev = current > 5 ? current - 5 : null;
-  const next = current < lastPage ? current + 5 : null;
+  const prev = current > 3 ? current - 3 : null;
+  const next = current < lastPage ? current + 3 : null;
 
   const pages = [firstPage, prev, current, next, lastPage];
 
@@ -34,12 +34,28 @@ const buttonRoundedOptions = computed(() => {
 });
 
 const prevPage = () => {
-  if (props.currentPage > 1) emit("change-page", props.currentPage - 1);
+  if (props.currentPage > 1 && !props.loading) {
+    emit("change-page", props.currentPage - 1);
+    resetPageToTop();
+  }
 };
 
 const nextPage = () => {
-  if (props.currentPage < props.pagination?.pages)
+  if (props.currentPage < props.pagination?.pages && !props.loading)
     emit("change-page", props.currentPage + 1);
+  resetPageToTop();
+};
+
+const handleClick = (itemNumber: number) => {
+  if (!props.loading) emit("change-page", itemNumber);
+  resetPageToTop();
+};
+
+const resetPageToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 </script>
 
@@ -74,7 +90,7 @@ const nextPage = () => {
         v-for="(itemButton, index) in buttonRoundedOptions"
         :key="index"
         :active="currentPage === itemButton"
-        @click="emit('change-page', itemButton)"
+        @click="handleClick(itemButton)"
       >
         {{ itemButton }}
       </button-rounded>
