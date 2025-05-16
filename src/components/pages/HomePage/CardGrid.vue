@@ -46,8 +46,8 @@ const nextPage = () => {
   resetPageToTop();
 };
 
-const handleClick = (itemNumber: number) => {
-  if (!props.loading) emit("change-page", itemNumber);
+const handleClick = (itemNumber: number | null) => {
+  if (!props.loading && itemNumber) emit("change-page", itemNumber);
   resetPageToTop();
 };
 
