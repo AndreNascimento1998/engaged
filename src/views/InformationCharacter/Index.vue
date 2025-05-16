@@ -4,12 +4,11 @@ import { computed, ref, watch } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import router from "@/router";
-import CardInfo from "@/components/base/Cards/Card.vue";
 import LoadingGrowth from "@/components/base/Loading/LoadingGrowth.vue";
 import { Episodes } from "@/interfaces/Character";
 import ArrowChangePage from "@/components/Icons/ArrowChangePage.vue";
-import { TranslateKey } from "@/helpers/TranslateKey";
-import ExternalLink from "@/components/Icons/ExternalLink.vue";
+import CardInformation from "@/components/pages/InformationCharacter/CardInformation.vue";
+import CardEpisodes from "@/components/pages/InformationCharacter/CardEpisodes.vue";
 
 const route = useRoute();
 
@@ -44,15 +43,6 @@ const GET_CHARACTER_BY_ID = gql`
   }
 `;
 
-const formatsEpisodes: Record<string, string> = {
-  Pilot: "Pilot_(Rick_and_Morty)",
-  "Edge of Tomorty: Rick, Die, Rickpeat": "Edge_of_Tomorty:_Rick_Die_Rickpeat",
-  "Claw and Hoarder: Special Ricktim's Morty":
-    "Claw_and_Hoarder:_Special_Ricktim%27s_Morty",
-  "One Crew Over the Crewcoo's Morty": "One_Crew_over_the_Crewcoo%27s_Morty",
-  "Star Mort: Rickturn of the Jerri": "Star_Mort_Rickturn_of_the_Jerri",
-};
-
 const { result, loading, error } = useQuery(GET_CHARACTER_BY_ID, () => ({
   id: selectedId.value,
 }));
@@ -69,24 +59,6 @@ const episodes = computed(() => {
 watch(result, (newError) => {
   if (!newError.character) router.push({ name: "HomePage" });
 });
-
-const formatEspecifyEpisode = (episode: string) => {
-  return formatsEpisodes[episode] || episode;
-};
-
-const parsedEpisode = (episode: string) => {
-  console.log(episode);
-  const episodeFormatter =
-    episode === "Pilot" ||
-    episode === "Edge of Tomorty: Rick, Die, Rickpeat" ||
-    episode === "Claw and Hoarder: Special Ricktim's Morty" ||
-    episode === "One Crew Over the Crewcoo's Morty" ||
-    episode === "Star Mort: Rickturn of the Jerri"
-      ? formatEspecifyEpisode(episode)
-      : episode.replace(" ", "_");
-
-  window.open(`https://en.wikipedia.org/wiki/${episodeFormatter}`, "_blank");
-};
 </script>
 
 <template>
@@ -109,88 +81,14 @@ const parsedEpisode = (episode: string) => {
       }}</span>
     </div>
     <div class="flex gap-20 flex-col lg:flex-row">
-      <card-info class="card-width overflow-auto animation-mounted-card-left">
-        <div class="flex flex-col gap-8 text-xl">
-          <span class="text-title text-2xl sticky pt-6 pb-2 top-0 bg-white"
-            >Ficha técnica</span
-          >
-          <div class="flex flex-col border-b-2 border-[#21212114]">
-            <span class="text-text-card font-bold">Gênero</span>
-            <span class="text-information">
-              {{
-                TranslateKey[result?.character?.gender] ||
-                result?.character?.gender
-              }}
-            </span>
-          </div>
-          <div class="flex flex-col border-b-2 border-[#21212114]">
-            <span class="text-text-card font-bold">Espécie</span>
-            <span class="text-information">
-              {{
-                TranslateKey[result?.character?.species] ||
-                result?.character?.species
-              }}
-            </span>
-          </div>
-          <div class="flex flex-col border-b-2 border-[#21212114]">
-            <span class="text-text-card font-bold">Origem</span>
-            <span class="text-information">
-              {{
-                TranslateKey[result?.character?.origin.name] ||
-                result?.character?.origin.name
-              }}
-            </span>
-          </div>
-          <div class="flex flex-col border-b-2 border-[#21212114]">
-            <span class="text-text-card font-bold">Status</span>
-            <span class="text-information">
-              {{
-                TranslateKey[result?.character?.status] ||
-                result?.character?.status
-              }}
-            </span>
-          </div>
-          <div class="flex flex-col border-b-2 border-[#21212114]">
-            <span class="text-text-card font-bold">Localização</span>
-            <span class="text-information">
-              {{
-                TranslateKey[result?.character?.location.type] ||
-                result?.character?.location.type
-              }}
-              -
-              {{
-                TranslateKey[result?.character?.location.name] ||
-                result?.character?.location.name
-              }}
-            </span>
-          </div>
-        </div>
-      </card-info>
-      <card-info class="card-width overflow-auto animation-mounted-card-right">
-        <div class="flex flex-col gap-8 text-xl">
-          <span class="text-title text-2xl sticky pt-6 pb-2 top-0 bg-white">
-            Participação Episódios
-          </span>
-          <div
-            v-for="episode in episodes"
-            :key="episode.epNumber"
-            class="flex flex-col border-b-2 border-[#21212114]"
-          >
-            <span class="text-text-card font-bold">
-              {{ episode.epNumber }}
-            </span>
-            <div class="grid grid-cols-[4fr_0.4fr] items-center gap-12">
-              <span class="text-information">
-                {{ episode.name }}
-              </span>
-              <external-link
-                class="cursor-pointer"
-                @click="parsedEpisode(episode.name)"
-              />
-            </div>
-          </div>
-        </div>
-      </card-info>
+      <card-information
+        :gender="result?.character?.gender"
+        :species="result?.character?.species"
+        :origin="result?.character?.origin"
+        :status="result?.character?.status"
+        :location="result?.character?.location"
+      />
+      <card-episodes :episodes="episodes" />
     </div>
   </div>
   <div v-if="result" class="flex justify-center text-2xl text-white pb-12">
@@ -206,26 +104,6 @@ const parsedEpisode = (episode: string) => {
 </template>
 
 <style lang="scss" scoped>
-.text-title {
-  color: $title-card;
-  font-weight: bold;
-}
-
-.text-information {
-  color: $information-card;
-  font-style: italic;
-}
-
-.card-width {
-  width: 480px;
-  height: 580px;
-
-  @media (max-width: 768px) {
-    width: 340px;
-    height: 600px;
-  }
-}
-
 .hover-back-page {
   &:hover {
     color: $hover;
@@ -233,38 +111,6 @@ const parsedEpisode = (episode: string) => {
     fill: $hover;
 
     stroke: $hover;
-  }
-}
-
-.animation-mounted-card-left {
-  animation: fadeInLeft 0.8s ease-in-out;
-  overflow: hidden;
-}
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-300px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animation-mounted-card-right {
-  animation: fadeInRight 0.8s ease-in-out;
-  overflow: hidden;
-}
-
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(300px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -282,9 +128,5 @@ const parsedEpisode = (episode: string) => {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.flex-nowrap {
-  flex-wrap: nowrap !important;
 }
 </style>
